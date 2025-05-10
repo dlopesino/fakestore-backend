@@ -1,5 +1,20 @@
 # Proyecto Fakestore backend
 
+🛒 FakeStore - Backend
+FakeStore es la API backend de una tienda online desarrollada en Node.js + TypeScript siguiendo arquitectura hexagonal (clean architecture). Ofrece los endpoints REST necesarios para gestionar productos y usuarios.
+
+Características:
+
+API REST modular y escalable.
+
+Endpoints para listado y detalle de productos.
+
+Testing automatizado con Jest (incluye entorno de testing con Docker y base de datos PostgreSQL).
+
+Prisma ORM para la gestión de la base de datos.
+
+Estructura preparada para ampliaciones futuras (auth, carritos, pedidos).
+
 ## dev
 
 1. Clonar el archivo .env.template o crear .env
