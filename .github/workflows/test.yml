@@ -34,13 +34,11 @@ jobs:
             echo "Failed to connect to Postgres after 100 seconds"
             exit 1
 
-      - name: Export env vars from .env.ci
+      - name: Load env vars & Run Prisma Migrate
         run: |
-          echo "Loading env vars from .env,ci"
+          echo "Loading env vars from .env.ci"
           export $(cat .env.ci | grep -v '^#' | xargs)
-
-      - name: Run Prisma Migrate
-        run: npx prisma migrate deploy --schema=prisma/schema.prisma
+          npx prisma migrate deploy --schema=prisma/schema.prisma
 
       - name: Run Tests
         run: npm test
