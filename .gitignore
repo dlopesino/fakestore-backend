@@ -9,5 +9,4 @@ postgres-test/
 .DS_Store
 .qodo
 
-.env.test
 .env
