@@ -1,0 +1,31 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    restart: always
+    container_name: postgres_fakestore_test
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./postgres-test:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  migrate:
+    image: node:18
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    working_dir: /app
+    volumes:
+    - .:/app
+    command: sh -c "npx prisma migrate deploy"
+    environment:
+      POSTGRES_URL: ${POSTGRES_URL}

@@ -1,0 +1,13 @@
+dist/
+build/
+node_modules/
+coverage/
+generated/
+postgres_data/
+postgres-test/
+
+.DS_Store
+.qodo
+
+.env.test
+.env
