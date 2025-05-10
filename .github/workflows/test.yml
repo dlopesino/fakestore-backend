@@ -27,6 +27,8 @@ jobs:
           sleep 15
 
       - name: Run Prisma Migrate (ensure DB is ready)
+        env:
+          POSTGRES_URL: postgresql://dlopesino:123456789@postgres-db:5432/fakestore_test?schema=public
         run: npx prisma migrate deploy --schema=prisma/schema.prisma
 
       - name: Run Tests
