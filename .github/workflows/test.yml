@@ -27,7 +27,7 @@ jobs:
           run: |
             echo "Waiting for Postgres connection..."
             for i in {1..20}; do
-                nc -z postgres-db 5432 && echo "Postgres is up!" && exit 0
+                nc -z localhost 5432 && echo "Postgres is up!" && exit 0
                 echo "Postgres not ready yet... ($i)"
                 sleep 5
             done
@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Prisma Migrate (ensure DB is ready)
         env:
-          POSTGRES_URL: postgresql://dlopesino:123456789@postgres-db:5432/fakestore_test?schema=public
+          POSTGRES_URL: postgresql://dlopesino:123456789@localhost:5432/fakestore_test?schema=public
         run: npx prisma migrate deploy --schema=prisma/schema.prisma
 
       - name: Run Tests
